@@ -221,4 +221,12 @@ export class Tree {
     const isBalanced = checkBalance(currentNode).isBalanced;
     return isBalanced;
   }
+    
+    rebalance() {
+        const sortedNodesData = [];
+        this.inOrder((node) => {
+            sortedNodesData.push(node.data);
+        })
+        this.root = this.buildTree(sortedNodesData);
+    }
 }
