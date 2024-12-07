@@ -120,4 +120,25 @@ export class Tree {
       return currentNode;
     }
   }
+
+  levelOrder(callback, queue = [this.root], currentNode = this.root) {
+    if (typeof callback !== "function") {
+      throw new Error("A callback is required, and it must be a function");
+    }
+
+    if (currentNode === null) {
+      return null;
+    }
+
+    while (queue.length > 0) {
+      currentNode = queue.shift();
+      callback(currentNode);
+      if (currentNode.left !== null) {
+        queue.push(currentNode.left);
+      }
+      if (currentNode.right !== null) {
+        queue.push(currentNode.right);
+      }
+    }
+  }
 }
