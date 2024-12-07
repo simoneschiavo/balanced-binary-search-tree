@@ -214,19 +214,19 @@ export class Tree {
         leftNode.isBalanced &&
         rightNode.isBalanced &&
         Math.abs(leftNode.height - rightNode.height) <= 1;
-      const height = Math.max(leftNode.height, rightNode.height);
+      const height = Math.max(leftNode.height, rightNode.height) + 1;
       return { isBalanced: balanced, height: height };
     }
 
     const isBalanced = checkBalance(currentNode).isBalanced;
     return isBalanced;
   }
-    
-    rebalance() {
-        const sortedNodesData = [];
-        this.inOrder((node) => {
-            sortedNodesData.push(node.data);
-        })
-        this.root = this.buildTree(sortedNodesData);
-    }
+
+  rebalance() {
+    const sortedNodesData = [];
+    this.inOrder((node) => {
+      sortedNodesData.push(node.data);
+    });
+    this.root = this.buildTree(sortedNodesData);
+  }
 }
