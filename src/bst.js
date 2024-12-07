@@ -72,4 +72,39 @@ export class Tree {
     }
     return currentNode;
   }
+
+  delete(currentNode = this.root, value) {
+    if (currentNode === null) {
+      return null;
+    }
+
+    if (value < currentNode.data) {
+      currentNode.left = this.delete(currentNode.left, value);
+    } else if (value > currentNode.data) {
+      currentNode.right = this.delete(currentNode.right, value);
+    } else {
+      // This is the case where  value === currentNode.data
+      // When root has 0 children or only right child
+      if (currentNode.left === null) {
+        return currentNode.right;
+      }
+      // When root has only left child
+      if (currentNode.right === null) {
+        return currentNode.left;
+      }
+      // When both children are there
+      const successorNode = this._getSuccessor(currentNode);
+      currentNode.data = successorNode.data;
+      currentNode.right = this.delete(currentNode.right, successorNode.data);
+    }
+    return currentNode;
+  }
+
+  _getSuccessor(node) {
+    node = node.right;
+    while (node !== null && node.left !== null) {
+      node = node.left;
+    }
+    return node;
+  }
 }
