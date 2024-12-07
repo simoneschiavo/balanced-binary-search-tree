@@ -141,4 +141,16 @@ export class Tree {
       }
     }
   }
+
+  preOrder(callback, currentNode = this.root) {
+    if (typeof callback !== "function") {
+      throw new Error("A callback is required, and it must be a function");
+    }
+    if (currentNode === null) {
+      return;
+    }
+    callback(currentNode);
+    this.preOrder(callback, currentNode.left);
+    this.preOrder(callback, currentNode.right);
+  }
 }
