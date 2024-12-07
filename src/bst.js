@@ -108,14 +108,14 @@ export class Tree {
     return node;
   }
 
-  find(currentNode = this.root, value) {
+  find(value, currentNode = this.root) {
     if (currentNode === null) {
       return null;
     }
     if (value < currentNode.data) {
-      return this.find(currentNode.left, value);
+      return this.find(value, currentNode.left);
     } else if (value > currentNode.data) {
-      return this.find(currentNode.right, value);
+      return this.find(value, currentNode.right);
     } else {
       return currentNode;
     }
@@ -176,5 +176,15 @@ export class Tree {
     this.postOrder(callback, currentNode.left);
     this.postOrder(callback, currentNode.right);
     callback(currentNode);
+  }
+
+  height(node, currentNode = this.find(node.data)) {
+    if (currentNode === null) {
+      return -1;
+    }
+    const leftHeight = this.height(currentNode.left);
+    const rightHeight = this.height(currentNode.right);
+
+    return Math.max(leftHeight, rightHeight) + 1;
   }
 }
