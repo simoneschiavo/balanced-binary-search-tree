@@ -182,9 +182,23 @@ export class Tree {
     if (currentNode === null) {
       return -1;
     }
-    const leftHeight = this.height(currentNode.left);
-    const rightHeight = this.height(currentNode.right);
+    const leftHeight = this.height(node, currentNode.left);
+    const rightHeight = this.height(node, currentNode.right);
 
     return Math.max(leftHeight, rightHeight) + 1;
+  }
+
+  depth(node, currentNode = this.root) {
+    if (currentNode === null) {
+      return -1;
+    }
+    if (currentNode === node) {
+      return 0;
+    }
+    if (node.value < currentNode.value) {
+      return this.depth(node, currentNode.left) + 1;
+    } else {
+      return this.depth(node, currentNode.right) + 1;
+    }
   }
 }
