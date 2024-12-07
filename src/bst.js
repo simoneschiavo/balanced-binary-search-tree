@@ -107,4 +107,17 @@ export class Tree {
     }
     return node;
   }
+
+  find(currentNode = this.root, value) {
+    if (currentNode === null) {
+      return null;
+    }
+    if (value < currentNode.data) {
+      return this.find(currentNode.left, value);
+    } else if (value > currentNode.data) {
+      return this.find(currentNode.right, value);
+    } else {
+      return currentNode;
+    }
+  }
 }
